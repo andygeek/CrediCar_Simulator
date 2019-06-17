@@ -21,9 +21,10 @@ public class SignUp3Activity extends AppCompatActivity {
         btn_FinishSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(getBaseContext(), LoginActivity.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
-                finish();
+
             }
         });
 

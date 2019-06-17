@@ -107,6 +107,7 @@ public class SignUp2Activity extends AppCompatActivity implements DatePickerDial
 
         databaseReference.child(USUARIO_NODE).child(usuario.getId()).setValue(usuario);
         progressDialog.dismiss();
+        signOut();
     }
 
 
@@ -141,4 +142,9 @@ public class SignUp2Activity extends AppCompatActivity implements DatePickerDial
         super.onStop();
         firebaseAuth.removeAuthStateListener(authStateListener);
     }
+
+    private void signOut(){
+        firebaseAuth.signOut();
+    }
+
 }
