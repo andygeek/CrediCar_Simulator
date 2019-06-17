@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_LoginFondo_1">
+
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img_Title_2" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/shape_rectangle_login"
+            android:layout_marginTop="40dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Correo"
+                    android:background="@drawable/shape_edittext_login"
+                    android:layout_marginHorizontal="15dp"
+                    android:paddingHorizontal="15dp"
+                    android:layout_marginTop="20dp"
+                    android:inputType="textEmailAddress"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Contraseña"
+                    android:background="@drawable/shape_edittext_login"
+                    android:layout_marginHorizontal="15dp"
+                    android:paddingHorizontal="15dp"
+                    android:layout_marginTop="12dp"
+                    android:inputType="textPassword"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Ingresar"
+                    android:background="@drawable/button_login"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginTop="50dp"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Crear Cuenta"
+                    android:background="@drawable/button_login"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        
+    </LinearLayout>
+
+
+</RelativeLayout>
