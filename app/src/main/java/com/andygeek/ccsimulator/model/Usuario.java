@@ -7,7 +7,25 @@ public class Usuario {
     private String correo;
     private String apellidos;
     private String fecha_nacimiento;
+    private String dni;
+    private String fecha_creacion;
 
+
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
     public String getId() {
         return id;

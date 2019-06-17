@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,13 +20,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText et_Correo_SignUp;
     private EditText et_Password_SignUp_1;
     private EditText et_Password_SignUp_2;
     private Button btn_ContinuarSignUp;
-    private Button btn_AceptarErrorPassword;
 
     private Dialog dialog_PopUpError;
 
@@ -54,11 +57,23 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String correo = et_Correo_SignUp.getText().toString();
                 String password_1 = et_Password_SignUp_1.getText().toString();
                 String password_2 = et_Password_SignUp_2.getText().toString();
 
-                if(!password_1.equals(password_2) || password_1.length()<6){
-                    show_dialog_error_password();
+                if(correo.length() == 0){
+                    show_dialog_error_password("Es necesario escribir un correo electronico.");
+                }
+                else if(!validar_correo(correo)){
+                    show_dialog_error_password("Escriba una dirección de correo electrónica valida.");
+                }
+                else if(!password_1.equals(password_2)){
+                    show_dialog_error_password("Las contraseñas no coinciden. Vuelva a escribirlas.");
+                    et_Password_SignUp_1.setText("");
+                    et_Password_SignUp_2.setText("");
+                }
+                else if(password_1.length()<6){
+                    show_dialog_error_password("La contraseña es demaciado corta. Intente con una nueva contraseña.");
                     et_Password_SignUp_1.setText("");
                     et_Password_SignUp_2.setText("");
                 }
@@ -97,9 +112,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void show_dialog_error_password(){
-        dialog_PopUpError.setContentView(R.layout.popup_error_sigup_password);
-        btn_AceptarErrorPassword = (Button)dialog_PopUpError.findViewById(R.id.btn_AceptarErrorPassword);
+    public void show_dialog_error_password(String message){
+        dialog_PopUpError.setContentView(R.layout.pop_up_error);
+        Button btn_AceptarErrorPassword = (Button)dialog_PopUpError.findViewById(R.id.btn_AceptarErrorPassword);
+        TextView tv_MessageError = (TextView)dialog_PopUpError.findViewById(R.id.tv_MessageError);
+        tv_MessageError.setText(message);
 
         btn_AceptarErrorPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +176,24 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    public boolean validar_correo(String email){
+        // Patrón para validar el email
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
+        // El email a validar
+
+        Matcher mather = pattern.matcher(email);
+
+        if (mather.find() == true) {
+            //Si el correo el valido
+            return true;
+        } else {
+            //Si no es valido
+            return false;
+        }
+    }
 
 }
 
