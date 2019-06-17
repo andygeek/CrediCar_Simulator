@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(LoginActivity.this, "No se pudo ingresar", Toast.LENGTH_SHORT).show();
+                    et_PasswordLogin.setText("");
                 }
             }
         });

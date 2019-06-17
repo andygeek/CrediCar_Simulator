@@ -54,10 +54,10 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String passrord_1 = et_Password_SignUp_1.getText().toString();
+                String password_1 = et_Password_SignUp_1.getText().toString();
                 String password_2 = et_Password_SignUp_2.getText().toString();
 
-                if(!passrord_1.equals(password_2)){
+                if(!password_1.equals(password_2) || password_1.length()<6){
                     show_dialog_error_password();
                     et_Password_SignUp_1.setText("");
                     et_Password_SignUp_2.setText("");

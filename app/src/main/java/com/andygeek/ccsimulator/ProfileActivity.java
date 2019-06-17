@@ -74,8 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signOut();
-                startActivity(new Intent(getBaseContext(), LoginActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                finishAffinity();
             }
         });
 
