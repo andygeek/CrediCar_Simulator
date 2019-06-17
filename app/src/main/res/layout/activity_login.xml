@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_LoginFondo_1">
+        android:src="@drawable/img_login_fondo_1">
 
     </ImageView>
 
@@ -17,20 +17,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="50dp"
-        android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:gravity="bottom">
+        android:gravity="start">
 
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150dp">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/img_Title_2" />
+                android:background="@drawable/img_title_red" />
 
         </RelativeLayout>
 
@@ -38,7 +38,7 @@
             android:id="@+id/rl_Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+
             android:background="@drawable/shape_rectangle_login"
             android:layout_marginTop="40dp">
 
@@ -78,6 +78,7 @@
                     android:layout_marginHorizontal="50dp"
                     android:layout_marginTop="50dp"/>
                 <Button
+                    android:id="@+id/btn_CrearCuenta"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:text="Crear Cuenta"

@@ -9,9 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_SignUpFondo_1"
-        android:background="@drawable/shape_gradient_login"
-        >
+        android:src="@drawable/img_signup_fondo_1"
+        android:background="@drawable/shape_gradient_login" >
+
+    </ImageView>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/shape_gradient_login">
 
     </ImageView>
 

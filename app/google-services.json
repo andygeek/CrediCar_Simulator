@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "132967585670",
+    "firebase_url": "https://credicar-7eb37.firebaseio.com",
+    "project_id": "credicar-7eb37",
+    "storage_bucket": "credicar-7eb37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132967585670:android:3c1f45a029834c3b",
+        "android_client_info": {
+          "package_name": "com.andygeek.ccsimulator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132967585670-8aq57ku0esge1r46487j35pjk6ku9av1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andygeek.ccsimulator",
+            "certificate_hash": "a0700f218e6267e59ad3172e6066f63fd93baa4f"
+          }
+        },
+        {
+          "client_id": "132967585670-ad728k9r1l9r8p9lcuc4eiotnkkpa7f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYcN7_XAhXAkvWPNY-9Qs9M1-Yz3kXIVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132967585670-ad728k9r1l9r8p9lcuc4eiotnkkpa7f4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
