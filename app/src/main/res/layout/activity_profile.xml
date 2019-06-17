@@ -24,6 +24,7 @@
                 android:gravity="center_horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_CerrarSesion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -59,12 +60,14 @@
                     android:textColor="@color/black"
                     android:textSize="17dp"/>
                 <TextView
+                    android:id="@+id/tv_EmailProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email"
+                    android:paddingTop="5dp"
                     android:textStyle="normal"
-                    android:textSize="17dp"
-                    android:layout_marginBottom="20dp"/>
+                    android:textSize="15dp"
+                    android:layout_marginBottom="15dp"/>
 
             </LinearLayout>
 
@@ -179,7 +182,8 @@
                             android:layout_height="100dp"
                             android:background="@drawable/shape_rentangle_red"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="30dp">
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"

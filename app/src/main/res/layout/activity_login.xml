@@ -48,6 +48,7 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/et_CorreoLogin"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:hint="Correo"
@@ -58,6 +59,7 @@
                     android:inputType="textEmailAddress"/>
 
                 <EditText
+                    android:id="@+id/et_PasswordLogin"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:hint="Contraseña"
@@ -68,6 +70,7 @@
                     android:inputType="textPassword"/>
 
                 <Button
+                    android:id="@+id/btn_Ingresar"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:text="Ingresar"
