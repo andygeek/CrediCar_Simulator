@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".CalculadoraCreditoActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".SignUp3Activity" />
         <activity android:name=".SignUp2Activity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashActivity" >
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PeriodosActivity" />
-        <activity android:name=".MainActivity"/>
-
-
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

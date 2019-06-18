@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andygeek.ccsimulator.model.Usuario;
@@ -31,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tv_EmailProfile;
     private LinearLayout ll_CerrarSesion;
     private TextView tv_NombreProfile;
+    private RelativeLayout rl_Calculadora;
 
     //PAra base de datos
     private DatabaseReference databaseReference;
@@ -43,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         tv_EmailProfile = findViewById(R.id.tv_EmailProfile);
         ll_CerrarSesion = findViewById(R.id.ll_CerrarSesion);
         tv_NombreProfile = findViewById(R.id.tv_NombreProfile);
-
+        rl_Calculadora = findViewById(R.id.rl_Calculadora);
 
 
         initialize();
@@ -78,7 +80,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
+        rl_Calculadora.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, CalculadoraCreditoActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
