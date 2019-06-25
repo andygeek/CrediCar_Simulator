@@ -3,7 +3,9 @@ package com.andygeek.ccsimulator.model;
 import java.util.Date;
 
 public class Datos_periodo {
-    private Date fecha_pago;
+    private int dia;
+    private int mes;
+    private int anio;
     private double saldo_anterior;
     private double saldo_actual;
     //private double tasa_ajustada_al_plazo;
@@ -41,13 +43,6 @@ public class Datos_periodo {
         this.portes = portes;
     }
 
-    public Date getFecha_pago() {
-        return fecha_pago;
-    }
-
-    public void setFecha_pago(Date fecha_pago) {
-        this.fecha_pago = fecha_pago;
-    }
 
     public double getSaldo_anterior() {
         return saldo_anterior;
@@ -96,5 +91,30 @@ public class Datos_periodo {
 
     public void setAmortizacion(double amortizacion) {
         this.amortizacion = amortizacion;
+    }
+
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 }

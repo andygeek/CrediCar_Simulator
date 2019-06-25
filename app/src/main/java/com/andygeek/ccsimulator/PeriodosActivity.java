@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.andygeek.ccsimulator.model.Datos_credito;
 import com.andygeek.ccsimulator.model.Datos_periodo;
+import com.andygeek.ccsimulator.model.Fecha;
 
 import java.io.Console;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +27,9 @@ public class PeriodosActivity extends AppCompatActivity {
     private TextView tv_dTna;
     private Datos_credito dc;
     private ArrayList<Datos_periodo> listaPeriodos;
+    //private TextView tv_SaldoCero;
+    //private TextView tv_FechaPrestamoPeriodo;
+    private double monto_financiado;
 
     private static final String TAG = "MyActivity";
 
@@ -34,6 +39,8 @@ public class PeriodosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_periodos);
         tv_dTna = findViewById(R.id.tv_dTna);
         lv_PlanPago = findViewById(R.id.lv_PlanPago);
+        //tv_SaldoCero = findViewById(R.id.tv_SaldoCero);
+        //tv_FechaPrestamoPeriodo = findViewById(R.id.tv_FechaPrestamoPeriodo);
 
         dc = (Datos_credito)getIntent().getExtras().getParcelable("objeto");
 
@@ -43,6 +50,18 @@ public class PeriodosActivity extends AppCompatActivity {
 
         PeriodoAdapter adapter = new PeriodoAdapter(listaPeriodos, this);
         lv_PlanPago.setAdapter(adapter);
+
+        //Mostrando el perido 0
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, dc.getAnio());
+        c.set(Calendar.MONTH, dc.getMes());
+        c.set(Calendar.DAY_OF_MONTH, dc.getDia());
+        String mostrar_fecha = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
+        //tv_FechaPrestamoPeriodo.setText(mostrar_fecha);
+        monto_financiado = dc.getPrecio_vehiculo() - dc.getInicial();
+        double redondeo_monto_financiado = (double)Math.round(monto_financiado * 100d) / 100d;
+        //tv_SaldoCero.setText(String.valueOf(redondeo_monto_financiado));
+
 
     }
 
@@ -92,7 +111,7 @@ public class PeriodosActivity extends AppCompatActivity {
         else
         {
             double saldo_anterior = recursividad_PRINT(n - 1, x, d, lp);
-            Date fecha_pago = fecha_de_pago_periodoN(n, d);//SOLO PARA MOSTRAR
+            Fecha fecha_pago = fecha_de_pago_periodoN(n, d);//SOLO PARA MOSTRAR
             int numero_dias = dias_del_mes(fecha_de_pago_periodoN(n - 1, d));
 
             double d_tasa_nominal_ajustada = tasa_nominal_ajustada(numero_dias, d.getTna());
@@ -124,8 +143,9 @@ public class PeriodosActivity extends AppCompatActivity {
             dp.setCuota(redondeo_Cuota);
             double cuota_a_pagar = redondeo_Cuota + redondeo_Portes;
             dp.setCuota_a_pagar(cuota_a_pagar);
-            dp.setFecha_pago(fecha_pago);
-
+            dp.setDia(fecha_pago.getDia());
+            dp.setMes(fecha_pago.getMes());
+            dp.setAnio(fecha_pago.getAnio());
             lp.add(dp);
 
             return saldo_anterior - amortz;
@@ -172,22 +192,24 @@ public class PeriodosActivity extends AppCompatActivity {
 
 
 
-    static int dias_del_mes(Date fecha)
+    static int dias_del_mes(Fecha fecha)
     {
-        Calendar cal = new GregorianCalendar(fecha.getYear(), fecha.getMonth(), 1);
+        Calendar cal = new GregorianCalendar(fecha.getAnio(), fecha.getMes(), 1);
         int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 28
         return days;
     }
 
-    static Date fecha_de_pago_periodoN(int n, Datos_credito d)
+    static Fecha fecha_de_pago_periodoN(int n, Datos_credito d)
     {
-        double aux_anio = (d.getFecha_prestamo().getYear() + n)/12f;
+        double doce = 12;
+        double mes_gg = d.getMes();
+        double aux_anio = (mes_gg + n)/doce;
         double double_anio = Math.floor(aux_anio);
-        int anio = (int)double_anio + d.getFecha_prestamo().getYear();
+        int anio = (int)double_anio + d.getAnio();
 
         int mes;
 
-        int aux_mes = (d.getFecha_prestamo().getMonth() + n)% 12;
+        int aux_mes = (d.getMes() + n)% 12;
         if (aux_mes > 0)
         {
             mes = aux_mes;
@@ -195,8 +217,9 @@ public class PeriodosActivity extends AppCompatActivity {
         else
         {
             mes = 12;
+            anio--;
         }
-        Date fecha_pago = new Date(anio,mes,d.getFecha_prestamo().getDay());
+        Fecha fecha_pago = new Fecha(d.getDia(),mes,anio);
 
         return fecha_pago;
     }
@@ -233,3 +256,6 @@ public class PeriodosActivity extends AppCompatActivity {
 
 
 }
+
+
+

@@ -39,7 +39,6 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
 
     private ImageButton imb_Calendario;
 
-    private Date fechaPrestamo;
     private Datos_credito dc;
 
     @Override
@@ -67,8 +66,10 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
             @Override
             public void onClick(View v) {
 
-                dc.setPeriodos(Integer.parseInt(et_NumPeriodos.getText().toString()));
+
                 dc.setPrecio_vehiculo(Double.parseDouble(et_ValorVehiculo.getText().toString()));
+                int nump = Integer.parseInt(et_NumPeriodos.getText().toString());
+                dc.setPeriodos(nump);
                 dc.setInicial(Double.parseDouble(et_CuotaInicial.getText().toString()));
                 double tea_escrita = Double.parseDouble(et_Tea.getText().toString());
                 double tea = tea_escrita/100f;
@@ -95,7 +96,6 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
                 double sva_escrito = Double.parseDouble(et_Sva.getText().toString());
                 double sva = sva_escrito/100;
                 dc.setSva(sva);
-                dc.setFecha_prestamo(fechaPrestamo);
                 dc.calcular();
 
                 Intent intent = new Intent(CalculadoraCreditoActivity.this, PeriodosActivity.class);
@@ -126,7 +126,10 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String currentDateString = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
-        fechaPrestamo = new Date(year,month,dayOfMonth);
+
+        dc.setDia(dayOfMonth);
+        dc.setMes(month);
+        dc.setAnio(year);
         tv_FechaPrestamo.setText(currentDateString);
 
     }

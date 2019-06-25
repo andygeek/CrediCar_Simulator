@@ -8,4 +8,5 @@
     <color name="margin_edittext_login">#ADA3A0</color>
     <color name="black">#000000</color>
     <color name="background_profile">#E9E9E9</color>
+    <color name="transparente">#00FFFFFF</color>
 </resources>

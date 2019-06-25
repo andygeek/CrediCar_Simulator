@@ -3,11 +3,11 @@ package com.andygeek.ccsimulator.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
-
 public class Datos_credito implements Parcelable {
 
-    private Date fecha_prestamo; //Fecha del prestamo
+    private int dia;
+    private int mes;
+    private int anio;
     private int periodos;//                            ME DA EL USUARIO
     private double precio_vehiculo; //                  ME DA EL USUARIO
     private double inicial; //                          ME DA EL USUARIO
@@ -20,9 +20,11 @@ public class Datos_credito implements Parcelable {
     private boolean fisico_virtual;//                  ME DA EL USUARIO
     private double portes;
 
+
     protected Datos_credito(Parcel in) {
-        long tmpFecha_prestamo = in.readLong();
-        fecha_prestamo = tmpFecha_prestamo != -1 ? new Date(tmpFecha_prestamo) : null;
+        dia = in.readInt();
+        mes = in.readInt();
+        anio = in.readInt();
         periodos = in.readInt();
         precio_vehiculo = in.readDouble();
         inicial = in.readDouble();
@@ -33,6 +35,7 @@ public class Datos_credito implements Parcelable {
         sva = in.readDouble();
         endosado_individual = in.readByte() != 0x00;
         fisico_virtual = in.readByte() != 0x00;
+        portes = in.readDouble();
     }
 
     @Override
@@ -42,7 +45,9 @@ public class Datos_credito implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(fecha_prestamo != null ? fecha_prestamo.getTime() : -1L);
+        dest.writeInt(dia);
+        dest.writeInt(mes);
+        dest.writeInt(anio);
         dest.writeInt(periodos);
         dest.writeDouble(precio_vehiculo);
         dest.writeDouble(inicial);
@@ -53,6 +58,7 @@ public class Datos_credito implements Parcelable {
         dest.writeDouble(sva);
         dest.writeByte((byte) (endosado_individual ? 0x01 : 0x00));
         dest.writeByte((byte) (fisico_virtual ? 0x01 : 0x00));
+        dest.writeDouble(portes);
     }
 
     @SuppressWarnings("unused")
@@ -67,6 +73,7 @@ public class Datos_credito implements Parcelable {
             return new Datos_credito[size];
         }
     };
+
 
     public void calcular(){
         portes = 0;
@@ -86,16 +93,31 @@ public class Datos_credito implements Parcelable {
         }
     }
 
-
     public Datos_credito() {
     }
 
-    public Date getFecha_prestamo() {
-        return fecha_prestamo;
+    public int getDia() {
+        return dia;
     }
 
-    public void setFecha_prestamo(Date fecha_prestamo) {
-        this.fecha_prestamo = fecha_prestamo;
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
     public int getPeriodos() {

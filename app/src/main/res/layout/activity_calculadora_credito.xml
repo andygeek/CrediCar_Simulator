@@ -92,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="15dp"
 
-                            android:text="Fecha de desembolso:"
+                            android:text="Fecha de des (1-28):"
                             android:textColor="@color/black"/>
 
                         <ImageButton

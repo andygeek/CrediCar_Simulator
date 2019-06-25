@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 import com.andygeek.ccsimulator.model.Datos_periodo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class PeriodoAdapter extends BaseExpandableListAdapter {
 
@@ -64,8 +68,17 @@ public class PeriodoAdapter extends BaseExpandableListAdapter {
         TextView tv_Fecha = convertView.findViewById(R.id.tv_Fecha);
         TextView tv_Saldo = convertView.findViewById(R.id.tv_Saldo);
 
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, periodos.get(groupPosition).getAnio());
+        c.set(Calendar.MONTH, periodos.get(groupPosition).getMes());
+        c.set(Calendar.DAY_OF_MONTH, periodos.get(groupPosition).getDia());
+        String mostrar_fecha = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
+
+
+
         tv_Numero.setText(String.valueOf(groupPosition + 1));
-        tv_Fecha.setText(String.valueOf(periodos.get(groupPosition).getFecha_pago()));
+        tv_Fecha.setText(String.valueOf(mostrar_fecha));
         tv_Saldo.setText(String.valueOf(periodos.get(groupPosition).getSaldo_actual()));
 
         return convertView;
@@ -80,14 +93,15 @@ public class PeriodoAdapter extends BaseExpandableListAdapter {
         TextView tv_dAmortizacion = convertView.findViewById(R.id.tv_dAmortizacion);
         TextView tv_dPortes = convertView.findViewById(R.id.tv_dPortes);
         TextView tv_dCuota = convertView.findViewById(R.id.tv_dCuota);
+        TextView tv_dCuota_Pagar = convertView.findViewById(R.id.tv_dCuota_Pagar);
 
         tv_dInteres.setText(String.valueOf(periodos.get(groupPosition).getInteres()));
         tv_dSeguroDegrabamen.setText(String.valueOf(periodos.get(groupPosition).getSeguro_degravamen()));
         tv_dSeguroVehicular.setText(String.valueOf(periodos.get(groupPosition).getSeguro_vehicular()));
         tv_dAmortizacion.setText(String.valueOf(periodos.get(groupPosition).getAmortizacion()));
         tv_dPortes.setText(String.valueOf(periodos.get(groupPosition).getPortes()));
-        tv_dCuota.setText(String.valueOf(periodos.get(groupPosition).getCuota_a_pagar()));
-
+        tv_dCuota.setText(String.valueOf(periodos.get(groupPosition).getCuota()));
+        tv_dCuota_Pagar.setText(String.valueOf(periodos.get(groupPosition).getCuota_a_pagar()));
         return convertView;
     }
 
