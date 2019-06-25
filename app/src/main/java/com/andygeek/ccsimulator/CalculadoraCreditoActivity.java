@@ -95,6 +95,10 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
                 dc.setSva(sva);
                 dc.calcular();
 
+                Intent intent = new Intent(CalculadoraCreditoActivity.this, PeriodosActivity.class);
+                intent.putExtra("objeto", dc);
+                startActivity(intent);
+
             }
         });
 

@@ -11,6 +11,23 @@
         android:layout_height="match_parent"
         android:padding="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tna: "/>
+
+            <TextView
+                android:id="@+id/tv_dTna"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_numero"
             android:layout_width="match_parent"
