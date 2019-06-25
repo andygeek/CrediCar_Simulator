@@ -10,7 +10,13 @@
         android:textSize="20dp"/>
 
     <TextView
-        android:id="@+id/tv_Amortizacion"
+        android:id="@+id/tv_Fecha"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_Saldo"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:textSize="20dp"/>

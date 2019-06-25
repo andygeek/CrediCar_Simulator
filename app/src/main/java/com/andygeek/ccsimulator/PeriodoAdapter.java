@@ -61,10 +61,12 @@ public class PeriodoAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.item_periodo, null);
         TextView tv_Numero = convertView.findViewById(R.id.tv_Numero);
-        TextView tv_Amortizacion = convertView.findViewById(R.id.tv_Amortizacion);
+        TextView tv_Fecha = convertView.findViewById(R.id.tv_Fecha);
+        TextView tv_Saldo = convertView.findViewById(R.id.tv_Saldo);
 
-        //tv_Numero.setText(String.valueOf(periodos.get(groupPosition).getNumero() + 1));
-        //tv_Amortizacion.setText(String.valueOf(periodos.get(groupPosition).getAmortizacion()));
+        tv_Numero.setText(String.valueOf(groupPosition + 1));
+        tv_Fecha.setText(String.valueOf(periodos.get(groupPosition).getFecha_pago()));
+        tv_Saldo.setText(String.valueOf(periodos.get(groupPosition).getSaldo_actual()));
 
         return convertView;
     }
@@ -72,11 +74,19 @@ public class PeriodoAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.item_detalle_periodo, null);
-        TextView tv_SaldoInicial = convertView.findViewById(R.id.tv_SaldoInicial);
-        TextView tv_SaldoFinal = convertView.findViewById(R.id.tv_SaldoFinal);
+        TextView tv_dInteres = convertView.findViewById(R.id.tv_dInteres);
+        TextView tv_dSeguroDegrabamen = convertView.findViewById(R.id.tv_dSeguroDegrabamen);
+        TextView tv_dSeguroVehicular = convertView.findViewById(R.id.tv_dSeguroVehicular);
+        TextView tv_dAmortizacion = convertView.findViewById(R.id.tv_dAmortizacion);
+        TextView tv_dPortes = convertView.findViewById(R.id.tv_dPortes);
+        TextView tv_dCuota = convertView.findViewById(R.id.tv_dCuota);
 
-        //tv_SaldoInicial.setText(String.valueOf(periodos.get(groupPosition).getSaldo_inicial()));
-        //tv_SaldoFinal.setText(String.valueOf(periodos.get(groupPosition).getSaldo_final()));
+        tv_dInteres.setText(String.valueOf(periodos.get(groupPosition).getInteres()));
+        tv_dSeguroDegrabamen.setText(String.valueOf(periodos.get(groupPosition).getSeguro_degravamen()));
+        tv_dSeguroVehicular.setText(String.valueOf(periodos.get(groupPosition).getSeguro_vehicular()));
+        tv_dAmortizacion.setText(String.valueOf(periodos.get(groupPosition).getAmortizacion()));
+        tv_dPortes.setText(String.valueOf(periodos.get(groupPosition).getPortes()));
+        tv_dCuota.setText(String.valueOf(periodos.get(groupPosition).getCuota_a_pagar()));
 
         return convertView;
     }

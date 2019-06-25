@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class PeriodosActivity extends AppCompatActivity {
 
-    //private ExpandableListView lv_PlanPago;
+    private ExpandableListView lv_PlanPago;
     private TextView tv_dTna;
     private Datos_credito dc;
     private ArrayList<Datos_periodo> listaPeriodos;
@@ -33,6 +33,7 @@ public class PeriodosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_periodos);
         tv_dTna = findViewById(R.id.tv_dTna);
+        lv_PlanPago = findViewById(R.id.lv_PlanPago);
 
         dc = (Datos_credito)getIntent().getExtras().getParcelable("objeto");
 
@@ -40,8 +41,8 @@ public class PeriodosActivity extends AppCompatActivity {
 
         hallar_raiz(dc,listaPeriodos);
 
-        String nnM = String.valueOf(listaPeriodos.get(2).getCuota());
-        tv_dTna.setText(nnM);
+        PeriodoAdapter adapter = new PeriodoAdapter(listaPeriodos, this);
+        lv_PlanPago.setAdapter(adapter);
 
     }
 
