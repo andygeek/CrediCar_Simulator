@@ -18,6 +18,7 @@ public class Datos_credito implements Parcelable {
     private double sva; //seguro vehicular anual        ME DA EL USUARIO
     private boolean endosado_individual;//                  ME DA EL USUARIO
     private boolean fisico_virtual;//                  ME DA EL USUARIO
+    private double portes;
 
     protected Datos_credito(Parcel in) {
         long tmpFecha_prestamo = in.readLong();
@@ -68,6 +69,7 @@ public class Datos_credito implements Parcelable {
     };
 
     public void calcular(){
+        portes = 0;
         double doce = 12;
         double exp_pow = (1 / doce);
         double base_pow = 1 + tea;
@@ -76,6 +78,12 @@ public class Datos_credito implements Parcelable {
         tna = (Math.pow(base_pow, exp_pow) - 1) * cons;
         //Calculo de la TDA
         tda = tdm * 12f;
+        if(endosado_individual == true){
+            portes = portes+18;
+        }
+        if(fisico_virtual==true){
+            portes = portes+10;
+        }
     }
 
 
@@ -168,5 +176,13 @@ public class Datos_credito implements Parcelable {
 
     public void setFisico_virtual(boolean fisico_virtual) {
         this.fisico_virtual = fisico_virtual;
+    }
+
+    public double getPortes() {
+        return portes;
+    }
+
+    public void setPortes(double portes) {
+        this.portes = portes;
     }
 }

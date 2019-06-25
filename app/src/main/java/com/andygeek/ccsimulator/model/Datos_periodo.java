@@ -6,14 +6,32 @@ public class Datos_periodo {
     private Date fecha_pago;
     private double saldo_anterior;
     private double saldo_actual;
-    private double tasa_ajustada_al_plazo;
-    private double tasa_seguro_degravamen_ajustado;
-    private double tasa_seguro_vehicular_ajustado;
+    //private double tasa_ajustada_al_plazo;
+    //private double tasa_seguro_degravamen_ajustado;
+    //private double tasa_seguro_vehicular_ajustado;
     private double seguro_degravamen;
     private double seguro_vehicular;
     private double interes;
     private double amortizacion;
     private double portes;
+    private double cuota_a_pagar;
+    private double cuota;
+
+    public double getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(double cuota) {
+        this.cuota = cuota;
+    }
+
+    public double getCuota_a_pagar() {
+        return cuota_a_pagar;
+    }
+
+    public void setCuota_a_pagar(double cuota_a_pagar) {
+        this.cuota_a_pagar = cuota_a_pagar;
+    }
 
     public double getPortes() {
         return portes;
@@ -47,29 +65,6 @@ public class Datos_periodo {
         this.saldo_actual = saldo_actual;
     }
 
-    public double getTasa_ajustada_al_plazo() {
-        return tasa_ajustada_al_plazo;
-    }
-
-    public void setTasa_ajustada_al_plazo(double tasa_ajustada_al_plazo) {
-        this.tasa_ajustada_al_plazo = tasa_ajustada_al_plazo;
-    }
-
-    public double getTasa_seguro_degravamen_ajustado() {
-        return tasa_seguro_degravamen_ajustado;
-    }
-
-    public void setTasa_seguro_degravamen_ajustado(double tasa_seguro_degravamen_ajustado) {
-        this.tasa_seguro_degravamen_ajustado = tasa_seguro_degravamen_ajustado;
-    }
-
-    public double getTasa_seguro_vehicular_ajustado() {
-        return tasa_seguro_vehicular_ajustado;
-    }
-
-    public void setTasa_seguro_vehicular_ajustado(double tasa_seguro_vehicular_ajustado) {
-        this.tasa_seguro_vehicular_ajustado = tasa_seguro_vehicular_ajustado;
-    }
 
     public double getSeguro_degravamen() {
         return seguro_degravamen;

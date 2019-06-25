@@ -55,7 +55,7 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
         et_NumPeriodos = findViewById(R.id.et_NumPeriodos);
         et_Tea = findViewById(R.id.et_Tea);
         et_Sva = findViewById(R.id.et_Sva);
-        rb_Endosado = findViewById(R.id.rb_Individual);
+        rb_Endosado = findViewById(R.id.rb_Endosado);
         rb_Individual = findViewById(R.id.rb_Individual);
         rb_EnvioVirtual = findViewById(R.id.rb_EnvioVirtual);
         rb_EnvioFisico = findViewById(R.id.rb_EnvioFisico);
@@ -76,7 +76,9 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
 
                 if(rb_Individual.isChecked() == true && rb_Endosado.isChecked() == false){
                     dc.setEndosado_individual(false);
-                    dc.setTdm(0.0005);
+                    double indiv = 0.0005f;
+                    dc.setTdm(indiv);
+
                 }
                 else{
                     dc.setEndosado_individual(true);
@@ -93,6 +95,7 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
                 double sva_escrito = Double.parseDouble(et_Sva.getText().toString());
                 double sva = sva_escrito/100;
                 dc.setSva(sva);
+                dc.setFecha_prestamo(fechaPrestamo);
                 dc.calcular();
 
                 Intent intent = new Intent(CalculadoraCreditoActivity.this, PeriodosActivity.class);
