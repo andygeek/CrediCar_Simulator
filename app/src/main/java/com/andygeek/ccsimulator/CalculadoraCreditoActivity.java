@@ -1,36 +1,45 @@
 package com.andygeek.ccsimulator;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.andygeek.ccsimulator.model.Datos_credito;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-public class CalculadoraCreditoActivity extends AppCompatActivity {
+public class CalculadoraCreditoActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    private Button btn_Calcular;
+
+    private TextView tv_FechaPrestamo; //Para mostrar, el vendadero o pasare como dato
     private EditText et_ValorVehiculo;
-    private EditText et_Desembolso;
+    private EditText et_CuotaInicial;
     private EditText et_NumPeriodos;
     private EditText et_Tea;
-    private EditText et_TasaAnualSeguro;
-    private EditText et_CuotaInicial;
+    private EditText et_Sva;
 
-    //Fecha desembolso
-    private int dia;
-    private int mes;
-    private int anio;
+    private RadioButton rb_Endosado;
+    private RadioButton rb_Individual;
 
-    private boolean individual;
-    private double envio;
-    private Date fecha_desembolso;
+    private RadioButton rb_EnvioVirtual;
+    private RadioButton rb_EnvioFisico;
 
-    private double tasa_efectiva_anual;             //No se calcula
-    private double tasa_degravamen_mensual;         //No se calcula
-    private double tasa_seguro_vehicular_anual;     //No se calcula
+    private ImageButton imb_Calendario;
 
-    private double tasa_nominal_anual;              //Se calcula facilmente
-    private double tasa_degravamen_anual;           //Se calcula facilmente
-
+    private Date fechaPrestamo;
     private Datos_credito dc;
 
     @Override
@@ -38,16 +47,80 @@ public class CalculadoraCreditoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculadora_credito);
 
-
         dc = new Datos_credito();
 
+        tv_FechaPrestamo = findViewById(R.id.tv_FechaPrestamo);
+        et_ValorVehiculo = findViewById(R.id.et_ValorVehiculo);
+        et_CuotaInicial = findViewById(R.id.et_CuotaInicial);
+        et_NumPeriodos = findViewById(R.id.et_NumPeriodos);
+        et_Tea = findViewById(R.id.et_Tea);
+        et_Sva = findViewById(R.id.et_Sva);
+        rb_Endosado = findViewById(R.id.rb_Individual);
+        rb_Individual = findViewById(R.id.rb_Individual);
+        rb_EnvioVirtual = findViewById(R.id.rb_EnvioVirtual);
+        rb_EnvioFisico = findViewById(R.id.rb_EnvioFisico);
+        imb_Calendario = findViewById(R.id.imb_Calendario);
+        btn_Calcular = findViewById(R.id.btn_Calcular);
+
+
+        btn_Calcular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dc.setPeriodos(Integer.parseInt(et_NumPeriodos.getText().toString()));
+                dc.setPrecio_vehiculo(Double.parseDouble(et_ValorVehiculo.getText().toString()));
+                dc.setInicial(Double.parseDouble(et_CuotaInicial.getText().toString()));
+                double tea_escrita = Double.parseDouble(et_Tea.getText().toString());
+                double tea = tea_escrita/100f;
+                dc.setTea(tea);
+
+                if(rb_Individual.isChecked() == true && rb_Endosado.isChecked() == false){
+                    dc.setEndosado_individual(false);
+                    dc.setTdm(0.0005);
+                }
+                else{
+                    dc.setEndosado_individual(true);
+                    dc.setTdm(0);
+                }
+
+                if(rb_EnvioFisico.isChecked() == true && rb_EnvioVirtual.isChecked() == false){
+                    dc.setFisico_virtual(true);
+                }
+                else{
+                    dc.setFisico_virtual(false);
+                }
+
+                double sva_escrito = Double.parseDouble(et_Sva.getText().toString());
+                double sva = sva_escrito/100;
+                dc.setSva(sva);
+                dc.calcular();
+
+            }
+        });
+
+
+
+        imb_Calendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePicker_Fragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
 
 
     }
 
 
-    public void calcular(){
-        tasa_nominal_anual = ((12*365)/360)*((Math.pow((1+tasa_efectiva_anual), (1/12)))-1);
-        tasa_degravamen_anual = tasa_degravamen_mensual * 12;
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
+        fechaPrestamo = new Date(year,month,dayOfMonth);
+        tv_FechaPrestamo.setText(currentDateString);
+
     }
 }

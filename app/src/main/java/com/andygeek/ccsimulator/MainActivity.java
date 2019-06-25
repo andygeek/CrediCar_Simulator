@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_Periodos;
     private Button btn_Calcular;
 
-    private Datos_credito datos_credito;
+    //private Datos_credito datos_credito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +32,6 @@ public class MainActivity extends AppCompatActivity {
         btn_Calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Double prestamo = Double.parseDouble(et_Prestamo.getText().toString());
-                Double tes = Double.parseDouble(et_Tes.getText().toString());
-                int periodos = Integer.parseInt(et_Periodos.getText().toString());
-
-                datos_credito = new Datos_credito(prestamo, tes, periodos);
-
-                Intent intent = new Intent(MainActivity.this, PeriodosActivity.class);
-                intent.putExtra("datos_credito", datos_credito);
-                startActivity(intent);
 
             }
         });

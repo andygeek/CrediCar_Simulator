@@ -96,19 +96,22 @@
                             android:textColor="@color/black"/>
 
                         <ImageButton
+                            android:id="@+id/imb_Calendario"
                             android:layout_width="20dp"
                             android:layout_height="25dp"
                             android:layout_gravity="center"
                             android:background="@drawable/icon_calendario"
                             android:elevation="5dp"/>
 
-                        <EditText
-                            android:id="@+id/et_Desembolso"
+                        <TextView
+                            android:id="@+id/tv_FechaPrestamo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:hint="DD/MM/AA"
                             android:textSize="15dp"
-                            android:enabled="false" />
+                            android:paddingLeft="10dp"
+                             />
 
 
                     </LinearLayout>
@@ -176,11 +179,13 @@
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/rb_EnvioFisico"
                                 android:layout_width="160dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Envío físico"/>
 
                             <RadioButton
+                                android:id="@+id/rb_EnvioVirtual"
                                 android:layout_width="160dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Envío virtual" />
@@ -208,11 +213,13 @@
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/rb_Individual"
                                 android:layout_width="160dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Individual"/>
 
                             <RadioButton
+                                android:id="@+id/rb_Endosado"
                                 android:layout_width="160dp"
                                 android:layout_height="wrap_content"
                                 android:hint="Endosado" />
@@ -234,7 +241,7 @@
                             android:text="Tasa anual de seguro:"/>
 
                         <EditText
-                            android:id="@+id/et_TasaAnualSeguro"
+                            android:id="@+id/et_Sva"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="%"
@@ -276,6 +283,7 @@
                 android:layout_marginTop="-60dp">
 
                 <Button
+                    android:id="@+id/btn_Calcular"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="100dp"
