@@ -12,6 +12,7 @@ public class Datos_periodo {
     //private double tasa_ajustada_al_plazo;
     //private double tasa_seguro_degravamen_ajustado;
     //private double tasa_seguro_vehicular_ajustado;
+    private double polisa_endosada;
     private double seguro_degravamen;
     private double seguro_vehicular;
     private double interes;
@@ -19,6 +20,14 @@ public class Datos_periodo {
     private double portes;
     private double cuota_a_pagar;
     private double cuota;
+
+    public double getPolisa_endosada() {
+        return polisa_endosada;
+    }
+
+    public void setPolisa_endosada(double polisa_endosada) {
+        this.polisa_endosada = polisa_endosada;
+    }
 
     public int getDias_de_mes() {
         return dias_de_mes;

@@ -28,10 +28,16 @@ public class PeriodosActivity extends AppCompatActivity {
 
 
     private ExpandableListView lv_PlanPago;
-    private TextView tv_dTna;
     private Datos_credito dc;
     private ArrayList<Datos_periodo> listaPeriodos;
     private TextView tv_vTCEA;
+    private TextView tv_vTIR;
+    private TextView tv_vTapagar;
+    private TextView tv_vTEA;
+    private TextView tv_vFecha_desembolso;
+    private TextView tv_vTFinanciado;
+    private TextView tv_vCuotaInicial;
+    private TextView tv_vPrecioVehiculo;
 
     private double monto_financiado;
 
@@ -42,9 +48,15 @@ public class PeriodosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_periodos);
         tv_vTCEA = findViewById(R.id.tv_vTCEA);
+        tv_vTIR = findViewById(R.id.tv_vTIR);
         lv_PlanPago = findViewById(R.id.lv_PlanPago);
-        //tv_SaldoCero = findViewById(R.id.tv_SaldoCero);
-        //tv_FechaPrestamoPeriodo = findViewById(R.id.tv_FechaPrestamoPeriodo);
+        tv_vTapagar = findViewById(R.id.tv_vTapagar);
+        tv_vTEA = findViewById(R.id.tv_vTEA);
+        tv_vFecha_desembolso = findViewById(R.id.tv_vFecha_desembolso);
+        tv_vCuotaInicial = findViewById(R.id.tv_vCuotaInicial);
+        tv_vTFinanciado = findViewById(R.id.tv_vTFinanciado);
+        tv_vCuotaInicial = findViewById(R.id.tv_vCuotaInicial);
+        tv_vPrecioVehiculo = findViewById(R.id.tv_vPrecioVehiculo);
 
         dc = (Datos_credito)getIntent().getExtras().getParcelable("objeto");
 
@@ -55,20 +67,44 @@ public class PeriodosActivity extends AppCompatActivity {
         PeriodoAdapter adapter = new PeriodoAdapter(listaPeriodos, this);
         lv_PlanPago.setAdapter(adapter);
 
-        //Mostrando el perido 0
+
+        double tir = hallando_tir(0,0, 100,listaPeriodos, dc);
+        double redondeo_tir = (double)Math.round((tir*100) * 100d) / 100d;
+        tv_vTIR.setText(String.valueOf(redondeo_tir));
+
+        double tcea = hallar_tcea(tir);
+        double redondeo_tcea = (double)Math.round((tcea*100) * 100d) / 100d;
+        tv_vTCEA.setText(String.valueOf(redondeo_tcea));
+
+        double total_a_pagar = total_pagar(listaPeriodos);
+        double redondeo_total_a_pagar = (double)Math.round(total_a_pagar * 100d) / 100d;
+        tv_vTapagar.setText(String.valueOf(redondeo_total_a_pagar));
+
+        double redondeo_tea = (double)Math.round((dc.getTea()*100) * 100d) / 100d;
+        tv_vTEA.setText(String.valueOf(redondeo_tea));
+
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, dc.getAnio());
         c.set(Calendar.MONTH, dc.getMes());
         c.set(Calendar.DAY_OF_MONTH, dc.getDia());
         String mostrar_fecha = DateFormat.getDateInstance(DateFormat.DATE_FIELD).format(c.getTime());
-        //tv_FechaPrestamoPeriodo.setText(mostrar_fecha);
+        tv_vFecha_desembolso.setText(mostrar_fecha);
+
         monto_financiado = dc.getPrecio_vehiculo() - dc.getInicial();
         double redondeo_monto_financiado = (double)Math.round(monto_financiado * 100d) / 100d;
-        //tv_SaldoCero.setText(String.valueOf(redondeo_monto_financiado));
+        tv_vTFinanciado.setText(String.valueOf(redondeo_monto_financiado));
 
-        double tca = hallando_tir(0,0, 100,listaPeriodos, dc);
-        tv_vTCEA.setText(String.valueOf(tca));
+        double redondeo_inicial = (double)Math.round(dc.getInicial() * 100d) / 100d;
+        tv_vCuotaInicial.setText(String.valueOf(redondeo_inicial));
 
+        double redondeo_vehiculo = (double)Math.round(dc.getPrecio_vehiculo() * 100d) / 100d;
+        tv_vPrecioVehiculo.setText(String.valueOf(redondeo_vehiculo));
+
+    }
+
+    double hallar_tcea(double tir) {
+        double tcea = Math.pow((1+tir),(360f/365f)) - 1f;
+        return tcea;
     }
 
     double recursividad(int n, double x, Datos_credito d)
@@ -147,7 +183,7 @@ public class PeriodosActivity extends AppCompatActivity {
             dp.setPortes(redondeo_Portes);
             double redondeo_Cuota = (double)Math.round(x * 100d) / 100d;
             dp.setCuota(redondeo_Cuota);
-            double cuota_a_pagar = x + redondeo_Portes;
+            double cuota_a_pagar = redondeo_Cuota + redondeo_Portes;
             dp.setCuota_a_pagar(cuota_a_pagar);
             dp.setDia(fecha_pago.getDia());
             dp.setMes(fecha_pago.getMes());
@@ -262,7 +298,7 @@ public class PeriodosActivity extends AppCompatActivity {
 
 
 
-    //Este se debe volver TOTAL FINANCIADO
+    //VAC
     double valc(double c, ArrayList<Datos_periodo> lp, Datos_credito dc){
 
 
@@ -295,7 +331,13 @@ public class PeriodosActivity extends AppCompatActivity {
     }
 
 
-
+    double total_pagar(ArrayList<Datos_periodo> lp){
+        double respuesta = 0;
+        for(int i=0; i<lp.size();i++){
+            respuesta = respuesta + lp.get(i).getCuota_a_pagar();
+        }
+        return respuesta;
+    }
 
 
 
