@@ -1,5 +1,7 @@
 package com.andygeek.ccsimulator;
 
+
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,12 +25,14 @@ import java.util.Random;
 
 public class PeriodosActivity extends AppCompatActivity {
 
+
+
     private ExpandableListView lv_PlanPago;
     private TextView tv_dTna;
     private Datos_credito dc;
     private ArrayList<Datos_periodo> listaPeriodos;
-    //private TextView tv_SaldoCero;
-    //private TextView tv_FechaPrestamoPeriodo;
+    private TextView tv_vTCEA;
+
     private double monto_financiado;
 
     private static final String TAG = "MyActivity";
@@ -37,7 +41,7 @@ public class PeriodosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_periodos);
-        tv_dTna = findViewById(R.id.tv_dTna);
+        tv_vTCEA = findViewById(R.id.tv_vTCEA);
         lv_PlanPago = findViewById(R.id.lv_PlanPago);
         //tv_SaldoCero = findViewById(R.id.tv_SaldoCero);
         //tv_FechaPrestamoPeriodo = findViewById(R.id.tv_FechaPrestamoPeriodo);
@@ -62,6 +66,8 @@ public class PeriodosActivity extends AppCompatActivity {
         double redondeo_monto_financiado = (double)Math.round(monto_financiado * 100d) / 100d;
         //tv_SaldoCero.setText(String.valueOf(redondeo_monto_financiado));
 
+        double tca = hallando_tir(0,0, 100,listaPeriodos, dc);
+        tv_vTCEA.setText(String.valueOf(tca));
 
     }
 
@@ -113,7 +119,7 @@ public class PeriodosActivity extends AppCompatActivity {
             double saldo_anterior = recursividad_PRINT(n - 1, x, d, lp);
             Fecha fecha_pago = fecha_de_pago_periodoN(n, d);//SOLO PARA MOSTRAR
             int numero_dias = dias_del_mes(fecha_de_pago_periodoN(n - 1, d));
-
+            dp.setDias_de_mes(numero_dias);
             double d_tasa_nominal_ajustada = tasa_nominal_ajustada(numero_dias, d.getTna());
             double d_tasa_degravamen_ajustado = tasa_seguro_degravamen_ajustada(numero_dias, d.getTda());
             double d_tasa_vehicular_ajustada = tasa_seguro_vehicular_ajustada(numero_dias, d.getSva());
@@ -141,7 +147,7 @@ public class PeriodosActivity extends AppCompatActivity {
             dp.setPortes(redondeo_Portes);
             double redondeo_Cuota = (double)Math.round(x * 100d) / 100d;
             dp.setCuota(redondeo_Cuota);
-            double cuota_a_pagar = redondeo_Cuota + redondeo_Portes;
+            double cuota_a_pagar = x + redondeo_Portes;
             dp.setCuota_a_pagar(cuota_a_pagar);
             dp.setDia(fecha_pago.getDia());
             dp.setMes(fecha_pago.getMes());
@@ -252,6 +258,56 @@ public class PeriodosActivity extends AppCompatActivity {
 
         recursividad_PRINT(d.getPeriodos(), respuesta, d, lp);
     }
+
+
+
+
+    //Este se debe volver TOTAL FINANCIADO
+    double valc(double c, ArrayList<Datos_periodo> lp, Datos_credito dc){
+
+
+
+        double valor = 0;
+        double dias = 0;
+        for(int i = 0; i<lp.size();i++){
+            dias = dias + lp.get(i).getDias_de_mes();
+            valor = valor + (lp.get(i).getCuota_a_pagar())/(Math.pow((1f+c),(dias/365f)));
+
+        }
+        return valor;
+    }
+
+    double hallando_tir(int cont,  double a,double b, ArrayList<Datos_periodo> lp, Datos_credito dc){
+
+        double c = (a+b)/2;
+        double financiado = dc.getPrecio_vehiculo() - dc.getInicial();
+        if(cont == 1000){
+            return c;
+        }
+        else{
+            if(valc(c, lp, dc)<financiado){
+                return hallando_tir(cont+1, a, c, lp, dc);
+            }
+            else{
+                return hallando_tir(cont+1, c, b, lp, dc);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

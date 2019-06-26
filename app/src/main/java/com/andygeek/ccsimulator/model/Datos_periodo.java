@@ -5,6 +5,7 @@ import java.util.Date;
 public class Datos_periodo {
     private int dia;
     private int mes;
+    private int dias_de_mes;
     private int anio;
     private double saldo_anterior;
     private double saldo_actual;
@@ -18,6 +19,14 @@ public class Datos_periodo {
     private double portes;
     private double cuota_a_pagar;
     private double cuota;
+
+    public int getDias_de_mes() {
+        return dias_de_mes;
+    }
+
+    public void setDias_de_mes(int dias_de_mes) {
+        this.dias_de_mes = dias_de_mes;
+    }
 
     public double getCuota() {
         return cuota;
