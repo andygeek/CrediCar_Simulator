@@ -13,13 +13,21 @@ public class Datos_periodo {
     //private double tasa_seguro_degravamen_ajustado;
     //private double tasa_seguro_vehicular_ajustado;
     private double polisa_endosada;
+    private double envio;
     private double seguro_degravamen;
     private double seguro_vehicular;
     private double interes;
     private double amortizacion;
-    private double portes;
     private double cuota_a_pagar;
     private double cuota;
+
+    public double getEnvio() {
+        return envio;
+    }
+
+    public void setEnvio(double envio) {
+        this.envio = envio;
+    }
 
     public double getPolisa_endosada() {
         return polisa_endosada;
@@ -53,13 +61,7 @@ public class Datos_periodo {
         this.cuota_a_pagar = cuota_a_pagar;
     }
 
-    public double getPortes() {
-        return portes;
-    }
 
-    public void setPortes(double portes) {
-        this.portes = portes;
-    }
 
 
     public double getSaldo_anterior() {

@@ -91,7 +91,8 @@ public class PeriodoAdapter extends BaseExpandableListAdapter {
         TextView tv_dSeguroDegrabamen = convertView.findViewById(R.id.tv_dSeguroDegrabamen);
         TextView tv_dSeguroVehicular = convertView.findViewById(R.id.tv_dSeguroVehicular);
         TextView tv_dAmortizacion = convertView.findViewById(R.id.tv_dAmortizacion);
-        TextView tv_dPortes = convertView.findViewById(R.id.tv_dPortes);
+        TextView tv_dEnvio = convertView.findViewById(R.id.tv_dEnvio);
+        TextView tv_dPolizaEndosada = convertView.findViewById(R.id.tv_dPolizaEndosada);
         TextView tv_dCuota = convertView.findViewById(R.id.tv_dCuota);
         TextView tv_dCuota_Pagar = convertView.findViewById(R.id.tv_dCuota_Pagar);
 
@@ -99,7 +100,8 @@ public class PeriodoAdapter extends BaseExpandableListAdapter {
         tv_dSeguroDegrabamen.setText(String.valueOf(periodos.get(groupPosition).getSeguro_degravamen()));
         tv_dSeguroVehicular.setText(String.valueOf(periodos.get(groupPosition).getSeguro_vehicular()));
         tv_dAmortizacion.setText(String.valueOf(periodos.get(groupPosition).getAmortizacion()));
-        tv_dPortes.setText(String.valueOf(periodos.get(groupPosition).getPortes()));
+        tv_dEnvio.setText(String.valueOf(periodos.get(groupPosition).getEnvio()));
+        tv_dPolizaEndosada.setText(String.valueOf(periodos.get(groupPosition).getPolisa_endosada()));
         tv_dCuota.setText(String.valueOf(periodos.get(groupPosition).getCuota()));
         tv_dCuota_Pagar.setText(String.valueOf(periodos.get(groupPosition).getCuota_a_pagar()));
         return convertView;

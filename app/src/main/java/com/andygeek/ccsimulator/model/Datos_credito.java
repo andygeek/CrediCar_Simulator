@@ -18,7 +18,10 @@ public class Datos_credito implements Parcelable {
     private double sva; //seguro vehicular anual        ME DA EL USUARIO
     private boolean endosado_individual;//                  ME DA EL USUARIO
     private boolean fisico_virtual;//                  ME DA EL USUARIO
-    private double portes;
+    private double envio;
+    private double poliza;
+
+
 
 
     protected Datos_credito(Parcel in) {
@@ -35,7 +38,8 @@ public class Datos_credito implements Parcelable {
         sva = in.readDouble();
         endosado_individual = in.readByte() != 0x00;
         fisico_virtual = in.readByte() != 0x00;
-        portes = in.readDouble();
+        envio = in.readDouble();
+        poliza = in.readDouble();
     }
 
     @Override
@@ -58,8 +62,29 @@ public class Datos_credito implements Parcelable {
         dest.writeDouble(sva);
         dest.writeByte((byte) (endosado_individual ? 0x01 : 0x00));
         dest.writeByte((byte) (fisico_virtual ? 0x01 : 0x00));
-        dest.writeDouble(portes);
+        dest.writeDouble(envio);
+        dest.writeDouble(poliza);
     }
+
+    public void calcular(){
+        envio = 0;
+        poliza = 0;
+        double doce = 12;
+        double exp_pow = (1 / doce);
+        double base_pow = 1 + tea;
+        double cons = ((12f * 365f) / 360f);
+        //Calculo de la TNA
+        tna = (Math.pow(base_pow, exp_pow) - 1) * cons;
+        //Calculo de la TDA
+        tda = tdm * 12f;
+        if(endosado_individual == true){
+            poliza = 18;
+        }
+        if(fisico_virtual==true){
+            envio = 10;
+        }
+    }
+
 
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<Datos_credito> CREATOR = new Parcelable.Creator<Datos_credito>() {
@@ -73,25 +98,6 @@ public class Datos_credito implements Parcelable {
             return new Datos_credito[size];
         }
     };
-
-
-    public void calcular(){
-        portes = 0;
-        double doce = 12;
-        double exp_pow = (1 / doce);
-        double base_pow = 1 + tea;
-        double cons = ((12f * 365f) / 360f);
-        //Calculo de la TNA
-        tna = (Math.pow(base_pow, exp_pow) - 1) * cons;
-        //Calculo de la TDA
-        tda = tdm * 12f;
-        if(endosado_individual == true){
-            portes = portes+18;
-        }
-        if(fisico_virtual==true){
-            portes = portes+10;
-        }
-    }
 
     public Datos_credito() {
     }
@@ -200,11 +206,19 @@ public class Datos_credito implements Parcelable {
         this.fisico_virtual = fisico_virtual;
     }
 
-    public double getPortes() {
-        return portes;
+    public double getEnvio() {
+        return envio;
     }
 
-    public void setPortes(double portes) {
-        this.portes = portes;
+    public void setEnvio(double envio) {
+        this.envio = envio;
+    }
+
+    public double getPoliza() {
+        return poliza;
+    }
+
+    public void setPoliza(double poliza) {
+        this.poliza = poliza;
     }
 }

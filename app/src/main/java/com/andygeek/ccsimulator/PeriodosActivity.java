@@ -179,11 +179,13 @@ public class PeriodosActivity extends AppCompatActivity {
             dp.setInteres(redondeo_Interes);
             double redondeo_Amortizacion = (double)Math.round(amortz * 100d) / 100d;
             dp.setAmortizacion(redondeo_Amortizacion);
-            double redondeo_Portes = (double)Math.round(d.getPortes() * 100d) / 100d;
-            dp.setPortes(redondeo_Portes);
+            double redondeo_Envio = (double)Math.round(d.getEnvio() * 100d) / 100d;
+            dp.setEnvio(redondeo_Envio);
+            double redondeo_Poliza = (double)Math.round(d.getPoliza() * 100d) / 100d;
+            dp.setPolisa_endosada(redondeo_Poliza);
             double redondeo_Cuota = (double)Math.round(x * 100d) / 100d;
             dp.setCuota(redondeo_Cuota);
-            double cuota_a_pagar = redondeo_Cuota + redondeo_Portes;
+            double cuota_a_pagar = redondeo_Cuota + redondeo_Poliza + redondeo_Envio;
             dp.setCuota_a_pagar(cuota_a_pagar);
             dp.setDia(fecha_pago.getDia());
             dp.setMes(fecha_pago.getMes());
