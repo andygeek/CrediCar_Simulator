@@ -5,7 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,13 +20,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private static final String USUARIO_NODE = "Usuarios";
+    private static final String HISTORIAL_NODE = "Historial";
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser firebaseUser;
+    private ListView lv_Historial;
 
     private String nombres;
     private String apellidos;
@@ -37,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
     //PAra base de datos
     private DatabaseReference databaseReference;
 
+    private List<String> historialFecha;
+    private ArrayAdapter arrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
         ll_CerrarSesion = findViewById(R.id.ll_CerrarSesion);
         tv_NombreProfile = findViewById(R.id.tv_NombreProfile);
         rl_Calculadora = findViewById(R.id.rl_Calculadora);
-
+        lv_Historial = findViewById(R.id.lv_Historial);
 
         initialize();
 
@@ -56,12 +66,15 @@ public class ProfileActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         //----------------
 
+        historialFecha = new ArrayList<>();
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 nombres = dataSnapshot.child(USUARIO_NODE).child(firebaseUser.getUid()).child("nombres/").getValue(String.class);
                 apellidos = dataSnapshot.child(USUARIO_NODE).child(firebaseUser.getUid()).child("apellidos/").getValue(String.class);
-                tv_NombreProfile.setText(nombres + " " + apellidos);
+                String nombre_completo = nombres + " " + apellidos;
+                tv_NombreProfile.setText(nombre_completo);
             }
 
             @Override
@@ -88,7 +101,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, historialFecha);
+        databaseReference.child(USUARIO_NODE).child(firebaseUser.getUid()).child(HISTORIAL_NODE).addValueEventListener(valueEventListener);
+        lv_Historial.setAdapter(arrayAdapter);
     }
 
 
@@ -97,8 +114,6 @@ public class ProfileActivity extends AppCompatActivity {
     public void initialize(){
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -110,8 +125,6 @@ public class ProfileActivity extends AppCompatActivity {
                     tv_EmailProfile.setText(firebaseUser.getEmail().toString());
                     tv_NombreProfile.setText(nombres);
 
-
-
                 }
                 else{
 
@@ -119,6 +132,40 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
     }
+
+
+
+
+    public ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            //Aqui va lo que pasara cuando los datos cambien
+            //Primero colocamostodo en blanco
+            //Sabemos que los datos viene en la forma de DataSnapshot
+
+            historialFecha.clear();
+
+            if(dataSnapshot.exists()){
+                for ( DataSnapshot snapshot:dataSnapshot.getChildren() ) {
+                    String fecha = snapshot.getKey();
+                    historialFecha.add(fecha);
+                }
+            }
+            //Le indicamos en tiempo de jecucion
+            arrayAdapter.notifyDataSetChanged();
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+
+
+    };
+
+
+
 
     @Override
     protected void onStart() {
