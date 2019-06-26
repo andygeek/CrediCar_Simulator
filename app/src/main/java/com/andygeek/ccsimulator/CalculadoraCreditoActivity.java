@@ -2,9 +2,11 @@ package com.andygeek.ccsimulator;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -15,12 +17,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andygeek.ccsimulator.model.Datos_credito;
+import com.andygeek.ccsimulator.model.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class CalculadoraCreditoActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    private static final String USUARIO_NODE = "Usuarios";
+    private static final String HISTORIAL_NODE = "Historial";
 
     private Button btn_Calcular;
 
@@ -41,6 +52,13 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
 
     private Datos_credito dc;
 
+    //PAra base de datos
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseUser firebaseUser;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +78,14 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
         rb_EnvioFisico = findViewById(R.id.rb_EnvioFisico);
         imb_Calendario = findViewById(R.id.imb_Calendario);
         btn_Calcular = findViewById(R.id.btn_Calcular);
+
+        initialize();
+
+        //Para firestore databse
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        //----------------
+
 
 
         btn_Calcular.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +125,7 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
                 dc.calcular();
 
                 Intent intent = new Intent(CalculadoraCreditoActivity.this, PeriodosActivity.class);
+                Guardar_Historial(dc);
                 intent.putExtra("objeto", dc);
                 startActivity(intent);
 
@@ -133,4 +160,46 @@ public class CalculadoraCreditoActivity extends AppCompatActivity implements Dat
         tv_FechaPrestamo.setText(currentDateString);
 
     }
+
+
+    public void Guardar_Historial(Datos_credito dc){
+        Date date = new Date();
+        DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        String id = hourdateFormat.format(date);
+        databaseReference.child(USUARIO_NODE).child(firebaseUser.getUid()).child(HISTORIAL_NODE).child(id).setValue(dc);
+
+    }
+
+    public void initialize(){
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //Creo un objeto User para mostrar sus datos.
+                firebaseUser = firebaseAuth.getCurrentUser();
+
+                if(firebaseUser != null){
+                    Log.v(null, "------- Estamos dentro --------");
+                }
+                else{
+                    Log.v(null, "------- Nos salimos --------");
+                }
+            }
+        };
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(authStateListener);
+    }
+
 }
