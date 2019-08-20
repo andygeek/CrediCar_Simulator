@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CalculadoraCreditoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background_profile">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp">
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white">
+
+        </RelativeLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:background="@drawable/shape_rectangle_profile"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Complete el formulario:"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="20dp"
+                android:layout_marginBottom="60dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:text="Valor del vehiculo:"/>
+
+                        <EditText
+                            android:id="@+id/et_ValorVehiculo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="S/."
+                            android:textSize="15dp"
+                            android:inputType="numberDecimal"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                                android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+
+                            android:text="Fecha de des (1-28):"
+                            android:textColor="@color/black"/>
+
+                        <ImageButton
+                            android:id="@+id/imb_Calendario"
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/icon_calendario"
+                            android:elevation="5dp"/>
+
+                        <TextView
+                            android:id="@+id/tv_FechaPrestamo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:hint="DD/MM/AA"
+                            android:textSize="15dp"
+                            android:paddingLeft="10dp"
+                             />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:text="Número de periodos:"/>
+
+                        <EditText
+                            android:id="@+id/et_NumPeriodos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="en meses"
+                            android:textSize="15dp"
+                            android:inputType="number"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:text="Tasa efectiva anula TEA:"/>
+
+                        <EditText
+                            android:id="@+id/et_Tea"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="%"
+                            android:inputType="numberDecimal"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:text="Tipo de envio del estado de cuenta:"
+                        android:textSize="15dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_EnvioFisico"
+                                android:layout_width="160dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Envío físico"/>
+
+                            <RadioButton
+                                android:id="@+id/rb_EnvioVirtual"
+                                android:layout_width="160dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Envío virtual" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:text="Tipo de deguro de degravamen:"
+                        android:textSize="15dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_Individual"
+                                android:layout_width="160dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Individual"/>
+
+                            <RadioButton
+                                android:id="@+id/rb_Endosado"
+                                android:layout_width="160dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Endosado" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:text="Tasa anual de seguro:"/>
+
+                        <EditText
+                            android:id="@+id/et_Sva"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="%"
+                            android:inputType="numberDecimal"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:text="Cuota inicial:"/>
+
+                        <EditText
+                            android:id="@+id/et_CuotaInicial"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="S/."
+                            android:inputType="numberDecimal"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-60dp">
+
+                <Button
+                    android:id="@+id/btn_Calcular"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="100dp"
+                    android:text="Calcular"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_login"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

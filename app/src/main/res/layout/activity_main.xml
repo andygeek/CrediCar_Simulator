@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Solo periodo Semestral (TES)"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/et_Prestamo"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Prestamo"/>
+
+        <EditText
+            android:id="@+id/et_Tes"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="TES"/>
+
+        <EditText
+            android:id="@+id/et_Periodos"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Periodos"/>
+
+        <Button
+            android:id="@+id/btn_Calcular"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Calcular" />
+
+    </LinearLayout>
+
+</RelativeLayout>
