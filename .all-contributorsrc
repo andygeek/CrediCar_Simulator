@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "0bsess",
+      "name": "Miguel Casas",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/42263178?v=4",
+      "profile": "https://github.com/0bsess",
+      "contributions": [
+        "design"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "CreditCar_Simulator",
+  "projectOwner": "andygeek",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
