@@ -1,5 +1,9 @@
 # CrediCar Simulator
-Credit Card Simulator is a simulation of vehicular credit in mobile app developed in Android Studio with Java.
+<p align="center">
+  <img src="https://imgur.com/ApdrbWu.png">
+</p>
+
+**Credit Card Simulator** is a simulation of vehicular credit in mobile app developed in Android Studio with Java.
 
 ![](https://i.imgur.com/MQKZq16.gif)
 
