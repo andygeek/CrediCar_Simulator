@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "andygeek",
+      "name": "Andy Eulogio",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/34007326?v=4",
+      "profile": "https://www.andygeek.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "0bsess",
       "name": "Miguel Casas",
       "avatar_url": "https://avatars3.githubusercontent.com/u/42263178?v=4",

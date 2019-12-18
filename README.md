@@ -21,6 +21,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://www.andygeek.com/"><img src="https://avatars1.githubusercontent.com/u/34007326?v=4" width="100px;" alt=""/><br /><sub><b>Andy Eulogio</b></sub></a><br /><a href="https://github.com/andygeek/CreditCar_Simulator/commits?author=andygeek" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/0bsess"><img src="https://avatars3.githubusercontent.com/u/42263178?v=4" width="100px;" alt=""/><br /><sub><b>Miguel Casas</b></sub></a><br /><a href="#design-0bsess" title="Design">🎨</a></td>
   </tr>
 </table>
