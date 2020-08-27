@@ -1,7 +1,7 @@
 # CrediCar Simulator
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+![](https://img.shields.io/badge/Made%20with-Android%20Studio-brightgreen) ![](https://img.shields.io/badge/Made%20with-Kotlin-orange)
+
 <p align="center">
   <img src="https://imgur.com/ApdrbWu.png">
 </p>
