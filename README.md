@@ -1,6 +1,6 @@
 # CrediCar Simulator
 
-![](https://img.shields.io/badge/Made%20with-Android%20Studio-brightgreen) ![](https://img.shields.io/badge/Made%20with-Kotlin-orange)
+![](https://img.shields.io/badge/Made%20with-Android%20Studio-brightgreen) ![](https://img.shields.io/badge/Made%20with-Java-purple)
 
 <p align="center">
   <img src="https://imgur.com/ApdrbWu.png">
